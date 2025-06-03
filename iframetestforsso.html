@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SAML SSO Request</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            background: #f5f6fa;
+        }
+        h1 {
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-top: 1em;
+            margin-bottom: 0.5em;
+            font-weight: bold;
+        }
+        input[type="text"], textarea {
+            width: 750px;
+            padding: 0.5em;
+            font-size: 1em;
+        }
+        .btn {
+            margin-top: 1em;
+            width: 120px;
+            padding: 0.5em;
+            font-size: 1em;
+        }
+        iframe {
+            margin-top: 2em;
+            width: 800px;
+            height: 500px;
+            border: 1px solid #bbb;
+            background: #fff;
+        }
+    </style>
+    <script type="text/javascript">
+        function submitRequest() {
+            var samlResponse = document.getElementById('samlResponse').value.trim();
+            if (!samlResponse) {
+                alert('Please enter the SAMLResponse value.');
+                return false;
+            }
+            document.ssoform.SAMLResponse.value = samlResponse;
+            document.ssoform.submit();
+        }
+    </script>
+</head>
+<body>
+    <h1>SAML SSO Request</h1>
+    <form action="https://ent-dev.participantportal.com/benefits/sso/saml"
+          method="POST"
+          enctype="application/x-www-form-urlencoded"
+          name="ssoform"
+          target="sso_iframe"
+          onsubmit="return false;">
+        <label for="samlResponse">Enter SAMLResponse:</label>
+        <textarea id="samlResponse" name="SAMLResponse" rows="6" required></textarea>
+        <br>
+        <input class="btn" type="button" value="Get Me In" onclick="submitRequest();">
+    </form>
+    <iframe name="sso_iframe" id="sso_iframe"></iframe>
+</body>
+</html>
